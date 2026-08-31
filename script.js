@@ -110,7 +110,10 @@ const status = [
   "Importei",
   "Exportei",
   "Arquivo na pasta",
-  "Aguardando arquivo"
+  "Aguardando arquivo",
+  "Em contato",
+  "Não sei",
+  "Com Erro"
 ];
 
 let sistemaAtual = null;
@@ -246,9 +249,35 @@ function mostrarSistema(sistema) {
         });
 
         divMercado.appendChild(info);
-        divMercado.appendChild(checks);
+divMercado.appendChild(checks);
 
-        blocoCiclo.appendChild(divMercado);
+// Campo de observação
+const observacaoContainer = document.createElement("div");
+observacaoContainer.className = "observacao";
+
+const observacaoLabel = document.createElement("label");
+observacaoLabel.textContent = "Observação:";
+
+const observacao = document.createElement("textarea");
+observacao.maxLength = 200;
+observacao.placeholder = "Digite uma observação (até 200 caracteres)...";
+observacao.value = progresso[chave]?.observacao || "";
+
+observacao.addEventListener("input", () => {
+  if (!progresso[chave]) {
+    progresso[chave] = {};
+  }
+
+  progresso[chave].observacao = observacao.value;
+  salvar();
+});
+
+observacaoLabel.appendChild(observacao);
+observacaoContainer.appendChild(observacaoLabel);
+
+divMercado.appendChild(observacaoContainer);
+
+blocoCiclo.appendChild(divMercado);
       });
 
       conteudo.appendChild(blocoCiclo);
