@@ -125,3 +125,37 @@ background: #111827;
 .oculto {
 display: none;
 }
+
+
+.observacao {
+  margin-top: 12px;
+}
+
+.observacao label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: bold;
+}
+
+.observacao textarea {
+  width: 100%;
+  min-height: 70px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.observacao textarea:focus {
+  outline: none;
+  border-color: #374151;
+}
+
+.checks {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
