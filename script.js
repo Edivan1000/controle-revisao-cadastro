@@ -147,6 +147,8 @@ function marcar(chave, tipo, valor) {
   progresso[chave][tipo] = valor;
 
   salvar();
+
+  atualizarContador();
 }
 
 
