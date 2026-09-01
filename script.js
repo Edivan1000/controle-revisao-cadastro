@@ -290,46 +290,62 @@ function atualizarDashboard() {
   let total = 0;
   let finalizados = 0;
 
-  Object.keys(dados).forEach(sistema => {
-    Object.keys(dados[sistema]).forEach(ciclo => {
-      dados[sistema][ciclo].forEach((mercado, indice) => {
+  for (const sistema in dados) {
+    for (const ciclo in dados[sistema]) {
+
+      const mercados = dados[sistema][ciclo];
+
+      mercados.forEach((mercado, indice) => {
 
         total++;
 
         const chave = chaveMercado(sistema, ciclo, indice);
 
-        if (progresso[chave] && progresso[chave]["Importei"] === true) {
+        if (
+          progresso[chave] &&
+          progresso[chave].Importei === true
+        ) {
           finalizados++;
         }
 
       });
-    });
-  });
+    }
+  }
 
   const pendentes = total - finalizados;
 
-  const percentual = total > 0
-    ? Math.round((finalizados / total) * 100)
-    : 0;
+  const percentual = total === 0
+    ? 0
+    : Math.round((finalizados / total) * 100);
 
-  document.getElementById("totalMercados").textContent = total;
-  document.getElementById("mercadosFinalizados").textContent = finalizados;
-  document.getElementById("mercadosPendentes").textContent = pendentes;
-  document.getElementById("percentualProgresso").textContent =
-    percentual + "%";
-}
+  const totalElemento =
+    document.getElementById("totalMercados");
 
-  const pendentes = total - finalizados;
+  const finalizadosElemento =
+    document.getElementById("mercadosFinalizados");
 
-  const percentual = total > 0
-    ? Math.round((finalizados / total) * 100)
-    : 0;
+  const pendentesElemento =
+    document.getElementById("mercadosPendentes");
 
-  document.getElementById("totalMercados").textContent = total;
-  document.getElementById("mercadosFinalizados").textContent = finalizados;
-  document.getElementById("mercadosPendentes").textContent = pendentes;
-  document.getElementById("percentualProgresso").textContent =
-    `${percentual}%`;
+  const percentualElemento =
+    document.getElementById("percentualProgresso");
+
+  if (totalElemento) {
+    totalElemento.textContent = total;
+  }
+
+  if (finalizadosElemento) {
+    finalizadosElemento.textContent = finalizados;
+  }
+
+  if (pendentesElemento) {
+    pendentesElemento.textContent = pendentes;
+  }
+
+  if (percentualElemento) {
+    percentualElemento.textContent =
+      percentual + "%";
+  }
 }
 
 function voltarInicio() {
