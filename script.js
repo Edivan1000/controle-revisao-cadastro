@@ -300,9 +300,6 @@ function mostrarSistema(sistema) {
       const titulo =
   document.createElement("h2");
 
-const titulo =
-  document.createElement("h2");
-
 titulo.textContent =
   `Ciclo ${ciclo}`;
 
@@ -562,7 +559,3 @@ function voltarInicio() {
 }
 
 atualizarContador();
-
-
-
-atualizarContador()
