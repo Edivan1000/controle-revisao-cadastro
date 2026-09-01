@@ -152,10 +152,7 @@ function marcar(chave, tipo, valor) {
 
   if (tipo === "Importei" && sistemaAtual) {
 
-    atualizarContadorSistema(sistemaAtual);
-
     const partes = chave.split("_");
-
     const ciclo = partes[1];
 
     atualizarContadorCiclo(
