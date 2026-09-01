@@ -291,24 +291,33 @@ function atualizarDashboard() {
   let finalizados = 0;
 
   Object.keys(dados).forEach(sistema => {
-
     Object.keys(dados[sistema]).forEach(ciclo => {
-
       dados[sistema][ciclo].forEach((mercado, indice) => {
 
         total++;
 
         const chave = chaveMercado(sistema, ciclo, indice);
 
-        if (progresso[chave]?.["Importei"] === true) {
+        if (progresso[chave] && progresso[chave]["Importei"] === true) {
           finalizados++;
         }
 
       });
-
     });
-
   });
+
+  const pendentes = total - finalizados;
+
+  const percentual = total > 0
+    ? Math.round((finalizados / total) * 100)
+    : 0;
+
+  document.getElementById("totalMercados").textContent = total;
+  document.getElementById("mercadosFinalizados").textContent = finalizados;
+  document.getElementById("mercadosPendentes").textContent = pendentes;
+  document.getElementById("percentualProgresso").textContent =
+    percentual + "%";
+}
 
   const pendentes = total - finalizados;
 
