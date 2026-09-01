@@ -150,7 +150,43 @@ function marcar(chave, tipo, valor) {
 
   atualizarContador();
 }
+function atualizarContador() {
 
+  let total = 0;
+  let importados = 0;
+
+  Object.keys(dados).forEach(sistema => {
+
+    Object.keys(dados[sistema]).forEach(ciclo => {
+
+      dados[sistema][ciclo].forEach((mercado, indice) => {
+
+        total++;
+
+        const chave =
+          chaveMercado(sistema, ciclo, indice);
+
+        if (
+          progresso[chave] &&
+          progresso[chave]["Importei"] === true
+        ) {
+          importados++;
+        }
+
+      });
+
+    });
+
+  });
+
+  const contador =
+    document.getElementById("contadorProgresso");
+
+  if (contador) {
+    contador.textContent =
+      `${importados} de ${total} mercados importados`;
+  }
+}
 
 function marcarCiclo(sistema, ciclo, valor) {
 
@@ -462,3 +498,9 @@ function voltarInicio() {
 
   sistemaAtual = null;
 }
+
+atualizarContador();
+
+
+
+atualizarContador()
