@@ -149,8 +149,19 @@ function marcar(chave, tipo, valor) {
   salvar();
 
   atualizarContador();
-}
 
+  if (tipo === "Importei" && sistemaAtual) {
+
+    const partes = chave.split("_");
+
+    const ciclo = partes[1];
+
+    atualizarContadorCiclo(
+      sistemaAtual,
+      ciclo
+    );
+  }
+}
 function contarSistema(sistema) {
 
   let total = 0;
@@ -208,7 +219,23 @@ function contarCiclo(sistema, ciclo) {
     importados: importados
   };
 }
+function atualizarContadorCiclo(sistema, ciclo) {
 
+  const contador = document.getElementById(
+    `contador-${sistema}-${ciclo}`
+  );
+
+  if (!contador) {
+    return;
+  }
+
+  const resultado = contarCiclo(sistema, ciclo);
+
+  contador.textContent =
+    `${resultado.importados} de ${resultado.total} importados`;
+}
+
+  
 function atualizarContador() {
 
   let total = 0;
