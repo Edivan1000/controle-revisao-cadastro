@@ -193,6 +193,24 @@ function contarSistema(sistema) {
   };
 }
 
+function atualizarContadorSistema(sistema) {
+
+  const contador =
+    document.getElementById(
+      `contador-sistema-${sistema}`
+    );
+
+  if (!contador) {
+    return;
+  }
+
+  const resultado =
+    contarSistema(sistema);
+
+  contador.textContent =
+    `${resultado.importados} de ${resultado.total} mercados importados`;
+}
+
 function contarCiclo(sistema, ciclo) {
 
   let total = 0;
