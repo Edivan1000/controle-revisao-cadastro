@@ -303,6 +303,21 @@ function mostrarSistema(sistema) {
 titulo.textContent =
   `Ciclo ${ciclo}`;
 
+const contadorCiclo =
+  document.createElement("span");
+
+contadorCiclo.className =
+  "contador-ciclo";
+
+contadorCiclo.id =
+  `contador-${sistema}-${ciclo}`;
+
+const dadosCiclo =
+  contarCiclo(sistema, ciclo);
+
+contadorCiclo.textContent =
+  `${dadosCiclo.importados} de ${dadosCiclo.total} importados`;
+
 
       const labelCiclo =
         document.createElement("label");
@@ -351,7 +366,8 @@ titulo.textContent =
 
 
       tituloCiclo.appendChild(titulo);
-      tituloCiclo.appendChild(labelCiclo);
+tituloCiclo.appendChild(contadorCiclo);
+tituloCiclo.appendChild(labelCiclo);
 
       blocoCiclo.appendChild(
         tituloCiclo
