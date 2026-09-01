@@ -148,8 +148,70 @@ function marcar(chave, tipo, valor) {
 
   salvar();
 
-  atualizarContador();
+atualizarContador();
+
+if (sistemaAtual) {
+  mostrarSistema(sistemaAtual);
 }
+
+function contarSistema(sistema) {
+
+  let total = 0;
+  let importados = 0;
+
+  Object.keys(dados[sistema]).forEach(ciclo => {
+
+    dados[sistema][ciclo].forEach((mercado, indice) => {
+
+      total++;
+
+      const chave =
+        chaveMercado(sistema, ciclo, indice);
+
+      if (
+        progresso[chave] &&
+        progresso[chave]["Importei"] === true
+      ) {
+        importados++;
+      }
+
+    });
+
+  });
+
+  return {
+    total: total,
+    importados: importados
+  };
+}
+
+function contarCiclo(sistema, ciclo) {
+
+  let total = 0;
+  let importados = 0;
+
+  dados[sistema][ciclo].forEach((mercado, indice) => {
+
+    total++;
+
+    const chave =
+      chaveMercado(sistema, ciclo, indice);
+
+    if (
+      progresso[chave] &&
+      progresso[chave]["Importei"] === true
+    ) {
+      importados++;
+    }
+
+  });
+
+  return {
+    total: total,
+    importados: importados
+  };
+}
+
 function atualizarContador() {
 
   let total = 0;
@@ -239,10 +301,13 @@ function mostrarSistema(sistema) {
 
 
       const titulo =
-        document.createElement("h2");
+  document.createElement("h2");
 
-      titulo.textContent =
-        `Ciclo ${ciclo}`;
+const contadorCiclo =
+  contarCiclo(sistema, ciclo);
+
+titulo.textContent =
+  `Ciclo ${ciclo} — ${contadorCiclo.importados} de ${contadorCiclo.total} importados`;
 
 
       const labelCiclo =
