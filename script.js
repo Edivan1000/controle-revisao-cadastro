@@ -141,6 +141,8 @@ function marcar(chave, tipo, valor) {
 
   progresso[chave][tipo] = valor;
   salvar();
+
+  atualizarDashboard();
 }
 
 function cicloConcluido(sistema, ciclo) {
@@ -284,8 +286,47 @@ blocoCiclo.appendChild(divMercado);
     });
 }
 
+function atualizarDashboard() {
+  let total = 0;
+  let finalizados = 0;
+
+  Object.keys(dados).forEach(sistema => {
+
+    Object.keys(dados[sistema]).forEach(ciclo => {
+
+      dados[sistema][ciclo].forEach((mercado, indice) => {
+
+        total++;
+
+        const chave = chaveMercado(sistema, ciclo, indice);
+
+        if (progresso[chave]?.["Exportei"] === true) {
+          finalizados++;
+        }
+
+      });
+
+    });
+
+  });
+
+  const pendentes = total - finalizados;
+
+  const percentual = total > 0
+    ? Math.round((finalizados / total) * 100)
+    : 0;
+
+  document.getElementById("totalMercados").textContent = total;
+  document.getElementById("mercadosFinalizados").textContent = finalizados;
+  document.getElementById("mercadosPendentes").textContent = pendentes;
+  document.getElementById("percentualProgresso").textContent =
+    `${percentual}%`;
+}
+
 function voltarInicio() {
   document.getElementById("telaSistema").classList.add("oculto");
   document.getElementById("inicio").classList.remove("oculto");
   sistemaAtual = null;
 }
+
+atualizarDashboard();
