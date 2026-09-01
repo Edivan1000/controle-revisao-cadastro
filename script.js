@@ -148,10 +148,7 @@ function marcar(chave, tipo, valor) {
 
   salvar();
 
-atualizarContador();
-
-if (sistemaAtual) {
-  mostrarSistema(sistemaAtual);
+  atualizarContador();
 }
 
 function contarSistema(sistema) {
@@ -303,11 +300,11 @@ function mostrarSistema(sistema) {
       const titulo =
   document.createElement("h2");
 
-const contadorCiclo =
-  contarCiclo(sistema, ciclo);
+const titulo =
+  document.createElement("h2");
 
 titulo.textContent =
-  `Ciclo ${ciclo} — ${contadorCiclo.importados} de ${contadorCiclo.total} importados`;
+  `Ciclo ${ciclo}`;
 
 
       const labelCiclo =
