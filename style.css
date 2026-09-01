@@ -159,3 +159,38 @@ display: none;
   gap: 15px;
   flex-wrap: wrap;
 }
+
+
+
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin: 25px 0 35px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.card h3 {
+  margin: 0 0 10px;
+  font-size: 15px;
+  color: #666;
+}
+
+.card strong {
+  font-size: 30px;
+  display: block;
+}
+
+@media (max-width: 700px) {
+  .dashboard {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
