@@ -320,16 +320,15 @@ function mostrarSistema(sistema) {
     .textContent = sistema;
 
 
-  // Remove contador do sistema anterior, se existir
-  const contadorExistente =
-    document.getElementById(`contador-sistema-${sistema}`);
+  // Remove qualquer contador de sistema antigo
+  document
+    .querySelectorAll(".contador-sistema")
+    .forEach(contador => {
+      contador.remove();
+    });
 
-  if (contadorExistente) {
-    contadorExistente.remove();
-  }
 
-
-  // Cria o contador do sistema
+  // Cria o contador do sistema atual
   const contadorSistema =
     document.createElement("div");
 
