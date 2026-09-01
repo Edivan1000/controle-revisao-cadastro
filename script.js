@@ -106,61 +106,443 @@ const dados = {
   }
 };
 
+
 const status = [
   "Importei",
   "Exportei",
   "Arquivo na pasta",
-  "Aguardando arquivo"
   "Aguardando arquivo",
   "Em contato",
   "Não sei",
   "Com Erro"
 ];
 
+
 let sistemaAtual = null;
 
-        });
+let progresso = JSON.parse(
+  localStorage.getItem("controleRevisao") || "{}"
+);
 
-        divMercado.appendChild(info);
-        divMercado.appendChild(checks);
-divMercado.appendChild(checks);
 
-        blocoCiclo.appendChild(divMercado);
-// Campo de observação
-const observacaoContainer = document.createElement("div");
-observacaoContainer.className = "observacao";
+function salvar() {
+  localStorage.setItem(
+    "controleRevisao",
+    JSON.stringify(progresso)
+  );
+}
 
-const observacaoLabel = document.createElement("label");
-observacaoLabel.textContent = "Observação:";
 
-const observacao = document.createElement("textarea");
-observacao.maxLength = 200;
-observacao.placeholder = "Digite uma observação (até 200 caracteres)...";
-observacao.value = progresso[chave]?.observacao || "";
+function chaveMercado(sistema, ciclo, indice) {
+  return `${sistema}_${ciclo}_${indice}`;
+}
 
-observacao.addEventListener("input", () => {
+
+function marcar(chave, tipo, valor) {
+
   if (!progresso[chave]) {
     progresso[chave] = {};
   }
 
-  progresso[chave].observacao = observacao.value;
+  progresso[chave][tipo] = valor;
+
   salvar();
-});
 
-observacaoLabel.appendChild(observacao);
-observacaoContainer.appendChild(observacaoLabel);
+  atualizarDashboard();
+}
 
-divMercado.appendChild(observacaoContainer);
 
-blocoCiclo.appendChild(divMercado);
-      });
+function marcarCiclo(sistema, ciclo, valor) {
 
-      conteudo.appendChild(blocoCiclo);
+  const chave = `ciclo_${sistema}_${ciclo}`;
+
+  progresso[chave] = valor;
+
+  salvar();
+}
+
+
+function mostrarSistema(sistema) {
+
+  sistemaAtual = sistema;
+
+  document
+    .getElementById("inicio")
+    .classList.add("oculto");
+
+  document
+    .getElementById("telaSistema")
+    .classList.remove("oculto");
+
+  document.getElementById("tituloSistema")
+    .textContent = sistema;
+
+  const conteudo =
+    document.getElementById("conteudo");
+
+  conteudo.innerHTML = "";
+
+
+  Object.keys(dados[sistema])
+    .sort((a, b) => Number(a) - Number(b))
+    .forEach(ciclo => {
+
+      const blocoCiclo =
+        document.createElement("div");
+
+      blocoCiclo.className = "ciclo";
+
+
+      const tituloCiclo =
+        document.createElement("div");
+
+      tituloCiclo.className =
+        "ciclo-titulo";
+
+
+      const titulo =
+        document.createElement("h2");
+
+      titulo.textContent =
+        `Ciclo ${ciclo}`;
+
+
+      const labelCiclo =
+        document.createElement("label");
+
+      labelCiclo.className = "check";
+
+
+      const checkboxCiclo =
+        document.createElement("input");
+
+      checkboxCiclo.type = "checkbox";
+
+      const chaveCiclo =
+        `ciclo_${sistema}_${ciclo}`;
+
+      checkboxCiclo.checked =
+        progresso[chaveCiclo] === true;
+
+
+      checkboxCiclo.addEventListener(
+        "change",
+        () => {
+
+          marcarCiclo(
+            sistema,
+            ciclo,
+            checkboxCiclo.checked
+          );
+
+        }
+      );
+
+
+      labelCiclo.appendChild(
+        checkboxCiclo
+      );
+
+      labelCiclo.appendChild(
+        document.createTextNode(
+          " Ciclo concluído"
+        )
+      );
+
+
+      tituloCiclo.appendChild(titulo);
+      tituloCiclo.appendChild(labelCiclo);
+
+      blocoCiclo.appendChild(tituloCiclo);
+
+
+      dados[sistema][ciclo].forEach(
+        (mercado, indice) => {
+
+          const chave =
+            chaveMercado(
+              sistema,
+              ciclo,
+              indice
+            );
+
+
+          const divMercado =
+            document.createElement("div");
+
+          divMercado.className =
+            "mercado";
+
+
+          const info =
+            document.createElement("div");
+
+          info.className =
+            "mercado-info";
+
+
+          const nome =
+            document.createElement("div");
+
+          nome.className =
+            "mercado-nome";
+
+          nome.textContent =
+            mercado.nome;
+
+
+          const pasta =
+            document.createElement("div");
+
+          pasta.className =
+            "pasta";
+
+          pasta.textContent =
+            `Pasta: ${mercado.pasta}`;
+
+
+          info.appendChild(nome);
+          info.appendChild(pasta);
+
+
+          const checks =
+            document.createElement("div");
+
+          checks.className =
+            "checks";
+
+
+          status.forEach(tipo => {
+
+            const label =
+              document.createElement("label");
+
+            label.className =
+              "check";
+
+
+            const checkbox =
+              document.createElement("input");
+
+            checkbox.type = "checkbox";
+
+            checkbox.checked =
+              progresso[chave]?.[tipo] === true;
+
+
+            checkbox.addEventListener(
+              "change",
+              () => {
+
+                marcar(
+                  chave,
+                  tipo,
+                  checkbox.checked
+                );
+
+              }
+            );
+
+
+            label.appendChild(checkbox);
+
+            label.appendChild(
+              document.createTextNode(
+                ` ${tipo}`
+              )
+            );
+
+
+            checks.appendChild(label);
+
+          });
+
+
+          divMercado.appendChild(info);
+
+          divMercado.appendChild(checks);
+
+
+          const observacaoContainer =
+            document.createElement("div");
+
+          observacaoContainer.className =
+            "observacao";
+
+
+          const observacaoLabel =
+            document.createElement("label");
+
+          observacaoLabel.textContent =
+            "Observação:";
+
+
+          const observacao =
+            document.createElement("textarea");
+
+          observacao.maxLength = 200;
+
+          observacao.placeholder =
+            "Digite uma observação (até 200 caracteres)...";
+
+
+          observacao.value =
+            progresso[chave]?.observacao || "";
+
+
+          observacao.addEventListener(
+            "input",
+            () => {
+
+              if (!progresso[chave]) {
+                progresso[chave] = {};
+              }
+
+              progresso[chave].observacao =
+                observacao.value;
+
+              salvar();
+
+            }
+          );
+
+
+          observacaoLabel.appendChild(
+            observacao
+          );
+
+          observacaoContainer.appendChild(
+            observacaoLabel
+          );
+
+          divMercado.appendChild(
+            observacaoContainer
+          );
+
+
+          blocoCiclo.appendChild(
+            divMercado
+          );
+
+        }
+      );
+
+
+      conteudo.appendChild(
+        blocoCiclo
+      );
+
     });
 }
 
+
 function voltarInicio() {
-  document.getElementById("telaSistema").classList.add("oculto");
-  document.getElementById("inicio").classList.remove("oculto");
+
+  document
+    .getElementById("telaSistema")
+    .classList.add("oculto");
+
+  document
+    .getElementById("inicio")
+    .classList.remove("oculto");
+
   sistemaAtual = null;
+
+  atualizarDashboard();
 }
+
+
+function atualizarDashboard() {
+
+  let total = 0;
+  let finalizados = 0;
+
+
+  Object.keys(dados).forEach(sistema => {
+
+    Object.keys(dados[sistema]).forEach(ciclo => {
+
+      dados[sistema][ciclo].forEach(
+        (mercado, indice) => {
+
+          total++;
+
+          const chave =
+            chaveMercado(
+              sistema,
+              ciclo,
+              indice
+            );
+
+
+          if (
+            progresso[chave] &&
+            progresso[chave]["Importei"] === true
+          ) {
+            finalizados++;
+          }
+
+        }
+      );
+
+    });
+
+  });
+
+
+  const pendentes =
+    total - finalizados;
+
+
+  const percentual =
+    total > 0
+      ? Math.round(
+          (finalizados / total) * 100
+        )
+      : 0;
+
+
+  const totalElemento =
+    document.getElementById(
+      "totalMercados"
+    );
+
+  const finalizadosElemento =
+    document.getElementById(
+      "mercadosFinalizados"
+    );
+
+  const pendentesElemento =
+    document.getElementById(
+      "mercadosPendentes"
+    );
+
+  const percentualElemento =
+    document.getElementById(
+      "percentualProgresso"
+    );
+
+
+  if (totalElemento) {
+    totalElemento.textContent = total;
+  }
+
+  if (finalizadosElemento) {
+    finalizadosElemento.textContent =
+      finalizados;
+  }
+
+  if (pendentesElemento) {
+    pendentesElemento.textContent =
+      pendentes;
+  }
+
+  if (percentualElemento) {
+    percentualElemento.textContent =
+      percentual + "%";
+  }
+
+}
+
+
+atualizarDashboard();
