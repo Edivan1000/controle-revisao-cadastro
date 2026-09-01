@@ -165,6 +165,8 @@ if (tipo === "Importei" && sistemaAtual) {
     ciclo
   );
 }
+}
+
 
 function contarSistema(sistema) {
 
