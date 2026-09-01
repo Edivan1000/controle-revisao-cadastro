@@ -300,7 +300,7 @@ function atualizarDashboard() {
 
         const chave = chaveMercado(sistema, ciclo, indice);
 
-        if (progresso[chave]?.["Exportei"] === true) {
+        if (progresso[chave]?.["Importei"] === true) {
           finalizados++;
         }
 
