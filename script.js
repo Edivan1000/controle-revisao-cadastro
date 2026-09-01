@@ -86,8 +86,9 @@ const dados = {
     30: [
       { nome: "SUPERMERCADO BARRETO", pasta: "30.32" },
       { nome: "MERCADO SAO JORGE", pasta: "30.48" },
-      { nome: "SUPERMERCADO PONTO CERTO", pasta: "30.33" },
-      { nome: "HORTIFRUTI PARAISO", pasta: "30.33" }
+      { nome: "SUPERMERCADO PONTO CERTO MATRIZ 71" , pasta: "30.33" },
+      { nome: "SUPERMERCADO PONTO CERTO FILIAL 52", pasta: "30.33" },
+      { nome: "HORTIFRUTI PARAISO FINAL 33", pasta: "30.33" }
     ]
   },
 
