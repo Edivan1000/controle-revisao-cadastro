@@ -247,3 +247,34 @@ h2 {
     width: 100%;
   }
 }
+
+
+/* ============================= */
+/* MELHORIA DA TELA INICIAL */
+/* ============================= */
+
+#inicio {
+  text-align: center;
+}
+
+#inicio h2 {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+#inicio .sistemas {
+  margin-top: 30px;
+}
+
+#inicio .sistema-btn {
+  min-height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#inicio .sistema-btn:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.14);
+}
