@@ -148,20 +148,24 @@ function marcar(chave, tipo, valor) {
 
   salvar();
 
-  atualizarContador();
+atualizarContador();
 
-  if (tipo === "Importei" && sistemaAtual) {
-
-    const partes = chave.split("_");
-
-    const ciclo = partes[1];
-
-    atualizarContadorCiclo(
-      sistemaAtual,
-      ciclo
-    );
-  }
+if (tipo === "Importei" && sistemaAtual) {
+  atualizarContadorSistema(sistemaAtual);
 }
+
+if (tipo === "Importei" && sistemaAtual) {
+
+  const partes = chave.split("_");
+
+  const ciclo = partes[1];
+
+  atualizarContadorCiclo(
+    sistemaAtual,
+    ciclo
+  );
+}
+
 function contarSistema(sistema) {
 
   let total = 0;
