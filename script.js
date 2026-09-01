@@ -300,6 +300,24 @@ function mostrarSistema(sistema) {
   document.getElementById("tituloSistema")
     .textContent = sistema;
 
+  const contadorSistema =
+  document.createElement("div");
+
+contadorSistema.className =
+  "contador-sistema";
+
+contadorSistema.id =
+  `contador-sistema-${sistema}`;
+
+const resultadoSistema =
+  contarSistema(sistema);
+
+contadorSistema.textContent =
+  `${resultadoSistema.importados} de ${resultadoSistema.total} mercados importados`;
+
+document.getElementById("tituloSistema")
+  .after(contadorSistema);
+
 
   const conteudo =
     document.getElementById("conteudo");
