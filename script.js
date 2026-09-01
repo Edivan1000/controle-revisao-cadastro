@@ -87,7 +87,6 @@ const dados = {
       { nome: "SUPERMERCADO BARRETO", pasta: "30.32" },
       { nome: "MERCADO SAO JORGE", pasta: "30.48" },
       { nome: "SUPERMERCADO PONTO CERTO", pasta: "30.33" },
-      { nome: "SUPERMERCADO PONTO CERTO", pasta: "30.33" },
       { nome: "HORTIFRUTI PARAISO", pasta: "30.33" }
     ]
   },
@@ -120,6 +119,7 @@ const status = [
 
 let sistemaAtual = null;
 
+
 let progresso = JSON.parse(
   localStorage.getItem("controleRevisao") || "{}"
 );
@@ -147,14 +147,13 @@ function marcar(chave, tipo, valor) {
   progresso[chave][tipo] = valor;
 
   salvar();
-
-  atualizarDashboard();
 }
 
 
 function marcarCiclo(sistema, ciclo, valor) {
 
-  const chave = `ciclo_${sistema}_${ciclo}`;
+  const chave =
+    `ciclo_${sistema}_${ciclo}`;
 
   progresso[chave] = valor;
 
@@ -176,6 +175,7 @@ function mostrarSistema(sistema) {
 
   document.getElementById("tituloSistema")
     .textContent = sistema;
+
 
   const conteudo =
     document.getElementById("conteudo");
@@ -210,7 +210,8 @@ function mostrarSistema(sistema) {
       const labelCiclo =
         document.createElement("label");
 
-      labelCiclo.className = "check";
+      labelCiclo.className =
+        "check";
 
 
       const checkboxCiclo =
@@ -218,8 +219,10 @@ function mostrarSistema(sistema) {
 
       checkboxCiclo.type = "checkbox";
 
+
       const chaveCiclo =
         `ciclo_${sistema}_${ciclo}`;
+
 
       checkboxCiclo.checked =
         progresso[chaveCiclo] === true;
@@ -253,7 +256,9 @@ function mostrarSistema(sistema) {
       tituloCiclo.appendChild(titulo);
       tituloCiclo.appendChild(labelCiclo);
 
-      blocoCiclo.appendChild(tituloCiclo);
+      blocoCiclo.appendChild(
+        tituloCiclo
+      );
 
 
       dados[sistema][ciclo].forEach(
@@ -324,7 +329,9 @@ function mostrarSistema(sistema) {
             const checkbox =
               document.createElement("input");
 
-            checkbox.type = "checkbox";
+            checkbox.type =
+              "checkbox";
+
 
             checkbox.checked =
               progresso[chave]?.[tipo] === true;
@@ -344,7 +351,9 @@ function mostrarSistema(sistema) {
             );
 
 
-            label.appendChild(checkbox);
+            label.appendChild(
+              checkbox
+            );
 
             label.appendChild(
               document.createTextNode(
@@ -353,13 +362,14 @@ function mostrarSistema(sistema) {
             );
 
 
-            checks.appendChild(label);
+            checks.appendChild(
+              label
+            );
 
           });
 
 
           divMercado.appendChild(info);
-
           divMercado.appendChild(checks);
 
 
@@ -442,107 +452,11 @@ function voltarInicio() {
     .getElementById("telaSistema")
     .classList.add("oculto");
 
+
   document
     .getElementById("inicio")
     .classList.remove("oculto");
 
+
   sistemaAtual = null;
-
-  atualizarDashboard();
 }
-
-
-function atualizarDashboard() {
-
-  let total = 0;
-  let finalizados = 0;
-
-
-  Object.keys(dados).forEach(sistema => {
-
-    Object.keys(dados[sistema]).forEach(ciclo => {
-
-      dados[sistema][ciclo].forEach(
-        (mercado, indice) => {
-
-          total++;
-
-          const chave =
-            chaveMercado(
-              sistema,
-              ciclo,
-              indice
-            );
-
-
-          if (
-            progresso[chave] &&
-            progresso[chave]["Importei"] === true
-          ) {
-            finalizados++;
-          }
-
-        }
-      );
-
-    });
-
-  });
-
-
-  const pendentes =
-    total - finalizados;
-
-
-  const percentual =
-    total > 0
-      ? Math.round(
-          (finalizados / total) * 100
-        )
-      : 0;
-
-
-  const totalElemento =
-    document.getElementById(
-      "totalMercados"
-    );
-
-  const finalizadosElemento =
-    document.getElementById(
-      "mercadosFinalizados"
-    );
-
-  const pendentesElemento =
-    document.getElementById(
-      "mercadosPendentes"
-    );
-
-  const percentualElemento =
-    document.getElementById(
-      "percentualProgresso"
-    );
-
-
-  if (totalElemento) {
-    totalElemento.textContent = total;
-  }
-
-  if (finalizadosElemento) {
-    finalizadosElemento.textContent =
-      finalizados;
-  }
-
-  if (pendentesElemento) {
-    pendentesElemento.textContent =
-      pendentes;
-  }
-
-  if (percentualElemento) {
-    percentualElemento.textContent =
-      percentual + "%";
-  }
-
-}
-
-
-atualizarDashboard();
