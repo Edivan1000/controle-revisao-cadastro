@@ -162,7 +162,6 @@ function marcar(chave, tipo, valor) {
   }
 }
 
-
 function contarSistema(sistema) {
 
   let total = 0;
