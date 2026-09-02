@@ -308,6 +308,8 @@ function atualizarPendentes() {
 
   Object.keys(dados).forEach(sistema => {
 
+    const pendentesSistema = [];
+
     Object.keys(dados[sistema])
       .sort((a, b) => Number(a) - Number(b))
       .forEach(ciclo => {
@@ -327,22 +329,57 @@ function atualizarPendentes() {
 
             if (!importado) {
 
-              const item =
-                document.createElement("div");
+              pendentesSistema.push({
+                ciclo: ciclo,
+                nome: mercado.nome
+              });
 
-              item.className =
-                "pendente-item";
-
-              item.textContent =
-                `${sistema} — Ciclo ${ciclo} — ${mercado.nome}`;
-
-              lista.appendChild(item);
             }
 
           }
         );
 
       });
+
+
+    if (pendentesSistema.length > 0) {
+
+      const grupo =
+        document.createElement("div");
+
+      grupo.className =
+        "pendente-sistema";
+
+
+      const titulo =
+        document.createElement("h4");
+
+      titulo.textContent =
+        `${sistema} — ${pendentesSistema.length} pendentes`;
+
+
+      grupo.appendChild(titulo);
+
+
+      pendentesSistema.forEach(pendente => {
+
+        const item =
+          document.createElement("div");
+
+        item.className =
+          "pendente-item";
+
+        item.textContent =
+          `Ciclo ${pendente.ciclo} — ${pendente.nome}`;
+
+        grupo.appendChild(item);
+
+      });
+
+
+      lista.appendChild(grupo);
+
+    }
 
   });
 
