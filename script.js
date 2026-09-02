@@ -293,6 +293,59 @@ function atualizarContador() {
   }
 }
 
+function atualizarPendentes() {
+
+  const lista =
+    document.getElementById("listaPendentes");
+
+  if (!lista) {
+    return;
+  }
+
+  lista.innerHTML = "";
+
+  Object.keys(dados).forEach(sistema => {
+
+    Object.keys(dados[sistema])
+      .sort((a, b) => Number(a) - Number(b))
+      .forEach(ciclo => {
+
+        dados[sistema][ciclo].forEach(
+          (mercado, indice) => {
+
+            const chave =
+              chaveMercado(
+                sistema,
+                ciclo,
+                indice
+              );
+
+            const importado =
+              progresso[chave]?.["Importei"] === true;
+
+            if (!importado) {
+
+              const item =
+                document.createElement("div");
+
+              item.className =
+                "pendente-item";
+
+              item.textContent =
+                `${sistema} — Ciclo ${ciclo} — ${mercado.nome}`;
+
+              lista.appendChild(item);
+            }
+
+          }
+        );
+
+      });
+
+  });
+
+}
+
 function marcarCiclo(sistema, ciclo, valor) {
 
   const chave =
