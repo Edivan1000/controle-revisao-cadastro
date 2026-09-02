@@ -307,3 +307,47 @@ h2 {
   }
 
 }
+
+
+
+/* ============================= */
+/* MERCADOS PENDENTES */
+/* ============================= */
+
+#mercadosPendentes {
+  margin-top: 35px;
+  background: white;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+}
+
+#mercadosPendentes h3 {
+  margin: 0 0 20px;
+  font-size: 20px;
+  color: #111827;
+  text-align: left;
+}
+
+#listaPendentes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pendente-item {
+  padding: 13px 16px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  text-align: left;
+  font-size: 14px;
+  color: #374151;
+  transition: 0.15s ease;
+}
+
+.pendente-item:hover {
+  background: #f3f4f6;
+  transform: translateX(3px);
+}
