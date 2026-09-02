@@ -317,15 +317,16 @@ h2 {
 #mercadosPendentes {
   margin-top: 35px;
   background: white;
-  border-radius: 16px;
-  padding: 25px;
-  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   border: 1px solid #e5e7eb;
 }
 
 #mercadosPendentes h3 {
-  margin: 0 0 20px;
-  font-size: 20px;
+  margin: 0 0 22px;
+  font-size: 22px;
+  font-weight: 700;
   color: #111827;
   text-align: left;
 }
@@ -333,21 +334,24 @@ h2 {
 #listaPendentes {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .pendente-item {
-  padding: 13px 16px;
+  position: relative;
+  padding: 16px 18px;
   background: #f9fafb;
   border: 1px solid #e5e7eb;
-  border-radius: 10px;
+  border-radius: 12px;
   text-align: left;
-  font-size: 14px;
-  color: #374151;
-  transition: 0.15s ease;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2937;
+  transition: 0.2s ease;
 }
 
 .pendente-item:hover {
   background: #f3f4f6;
-  transform: translateX(3px);
+  transform: translateX(4px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
 }
