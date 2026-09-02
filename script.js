@@ -151,6 +151,8 @@ function marcar(chave, tipo, valor) {
 
   atualizarContador();
 
+  atualizarPendentes();
+
   if (tipo === "Importei" && sistemaAtual) {
 
     const partes = chave.split("_");
