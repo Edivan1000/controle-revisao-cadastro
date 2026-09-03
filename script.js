@@ -753,5 +753,3 @@ sistemaAtual = null;
 
 atualizarContador();
 atualizarPendentes();
-
-console.log("PENDENTES:", document.getElementById("contadorPendentes"));
