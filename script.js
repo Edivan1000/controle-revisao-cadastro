@@ -419,6 +419,10 @@ function mostrarSistema(sistema) {
     .getElementById("telaSistema")
     .classList.remove("oculto");
 
+  document
+  .getElementById("telaAtividades")
+  .classList.add("oculto");
+
   document.getElementById("tituloSistema")
     .textContent = sistema;
 
