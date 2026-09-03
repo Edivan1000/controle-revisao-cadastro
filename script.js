@@ -737,7 +737,8 @@ function voltarInicio() {
     .classList.remove("oculto");
 
 
-  sistemaAtual = null;
+sistemaAtual = null;
 }
 
 atualizarContador();
+atualizarPendentes();
