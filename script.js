@@ -306,6 +306,8 @@ function atualizarPendentes() {
 
   lista.innerHTML = "";
 
+  let totalPendentes = 0;
+
   Object.keys(dados).forEach(sistema => {
 
     const pendentesSistema = [];
@@ -328,7 +330,9 @@ function atualizarPendentes() {
               progresso[chave]?.["Importei"] === true;
 
             if (!importado) {
-
+              
+              totalPendentes++;
+              
               pendentesSistema.push({
                 ciclo: ciclo,
                 nome: mercado.nome
@@ -382,6 +386,13 @@ function atualizarPendentes() {
     }
 
   });
+
+  const contador =
+  document.getElementById("contadorPendentes");
+
+if (contador) {
+  contador.textContent = totalPendentes;
+}
 
 }
 
