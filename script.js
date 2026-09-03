@@ -736,6 +736,18 @@ function mostrarSistema(sistema) {
     });
 }
 
+function mostrarAtividades() {
+
+  document
+    .getElementById("inicio")
+    .classList.add("oculto");
+
+  document
+    .getElementById("telaAtividades")
+    .classList.remove("oculto");
+
+}
+
 function voltarInicio() {
 
   document
