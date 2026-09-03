@@ -761,6 +761,12 @@ function mostrarAtividades() {
   ];
 
 
+  const atividadesSalvas =
+    JSON.parse(
+      localStorage.getItem("atividadesTemporarias") || "[]"
+    );
+
+
   atividades.forEach(atividade => {
 
     const label =
@@ -773,6 +779,44 @@ function mostrarAtividades() {
       document.createElement("input");
 
     checkbox.type = "checkbox";
+
+    checkbox.checked =
+      atividadesSalvas.includes(atividade);
+
+
+    checkbox.addEventListener(
+      "change",
+      () => {
+
+        let atividadesAtuais =
+          JSON.parse(
+            localStorage.getItem("atividadesTemporarias") || "[]"
+          );
+
+
+        if (checkbox.checked) {
+
+          if (!atividadesAtuais.includes(atividade)) {
+            atividadesAtuais.push(atividade);
+          }
+
+        } else {
+
+          atividadesAtuais =
+            atividadesAtuais.filter(
+              item => item !== atividade
+            );
+
+        }
+
+
+        localStorage.setItem(
+          "atividadesTemporarias",
+          JSON.stringify(atividadesAtuais)
+        );
+
+      }
+    );
 
 
     label.appendChild(checkbox);
@@ -789,7 +833,6 @@ function mostrarAtividades() {
   });
 
 }
-
 function voltarInicio() {
 
   document
