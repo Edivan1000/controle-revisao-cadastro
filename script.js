@@ -841,11 +841,16 @@ function voltarInicio() {
 
 
   document
+    .getElementById("telaAtividades")
+    .classList.add("oculto");
+
+
+  document
     .getElementById("inicio")
     .classList.remove("oculto");
 
 
-sistemaAtual = null;
+  sistemaAtual = null;
 }
 
 atualizarContador();
