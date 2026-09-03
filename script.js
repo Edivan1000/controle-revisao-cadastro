@@ -746,6 +746,48 @@ function mostrarAtividades() {
     .getElementById("telaAtividades")
     .classList.remove("oculto");
 
+
+  const lista =
+    document.getElementById("listaAtividades");
+
+  lista.innerHTML = "";
+
+
+  const atividades = [
+    "CARGAS NORMAIS",
+    "OPERAÇÃO MAIS UNIÃO",
+    "CARGA CAMPEÃO",
+    "REFORMA"
+  ];
+
+
+  atividades.forEach(atividade => {
+
+    const label =
+      document.createElement("label");
+
+    label.className = "atividade-check";
+
+
+    const checkbox =
+      document.createElement("input");
+
+    checkbox.type = "checkbox";
+
+
+    label.appendChild(checkbox);
+
+    label.appendChild(
+      document.createTextNode(
+        ` ${atividade}`
+      )
+    );
+
+
+    lista.appendChild(label);
+
+  });
+
 }
 
 function voltarInicio() {
